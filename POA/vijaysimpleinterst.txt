@@ -1,0 +1,25 @@
+data segment 
+    p dw 10000
+    n dw 5
+    r dw 2
+    sim dw ?
+data ends
+    
+code segment
+    assume cs: code, ds: data
+    
+    start:
+    mov ax, data
+    mov ds, ax
+    mov ax, 00001h
+    mul p
+    mul n
+    mul r
+    mov bx, 64h
+    div bx
+    mov sim, ax
+    
+    mov ah, 4ch
+    int 21h
+code ends
+end start

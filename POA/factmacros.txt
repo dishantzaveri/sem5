@@ -1,0 +1,27 @@
+FACT MACRO NUM
+    MOV AX,01H
+    L1:
+    MUL NUM
+    DEC NUM
+    JNZ L1 
+    
+ENDM
+
+DATA SEGMENT
+    NUM DB 4H
+DATA ENDS
+
+CODE SEGMENT
+    START:
+    
+    MOV AX,DATA
+    MOV DS,AX
+    LEA SI,NUM
+    MOV AX,01H
+    L1:
+    MUL NUM
+    DEC NUM
+    JNZ L1 
+    
+CODE ENDS
+END START
