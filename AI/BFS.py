@@ -1,34 +1,56 @@
-from collections import defaultdict
-class Graph:
-	def __init__(self):
-		self.graph = defaultdict(list)
-
-
-	def addEdge(self,u,v):
-		self.graph[u].append(v)
-
-	def BFS(self, s):
-
-		visited = [False] * (max(self.graph) + 1)
-		queue = []
-
-		queue.append(s)
-		visited[s] = True
-
-		while queue:
-
-			s = queue.pop(0)
-			print (s, end = " ")
-
-			for i in self.graph[s]:
-				if visited[i] == False:
-					queue.append(i)
-					visited[i] = True
-
-g = Graph()
-n=int(input('enter number of edges:\n'))
-for i in range(n):
-    print('enter v1 v2:')
-    g.addEdge(int(input()), int(input()))  
-
-g.BFS(2)
+graph = {
+  '5' : ['3','7'],
+  '3' : ['2', '4'],
+  '7' : ['8'],
+  '2' : [],
+  '4' : ['8'],
+  '8' : []
+}
+ 
+visited = []
+queue = []
+ 
+closed_list=[]
+path=[]
+ 
+def bfs(visited, graph, node,goal):
+   
+    visited.append(node)
+    path={}
+    path[node]=node
+    root=[]
+    queue.append(node)
+    print(f"Open List: {queue}\nClosed list: {closed_list} ")
+ 
+    while queue:        
+        m = queue.pop(0)
+        closed_list.append(m)
+        print(f"Open List: {queue}\nClosed list: {closed_list} ")
+   
+       
+   
+        if m==goal:
+           
+            while path[m]!=m:
+                root.append(m)
+                m=path[m]
+            root.append(m)
+            root.reverse()
+            print(f'Path:{root}')
+            return
+     
+ 
+        for neighbour in graph[m]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+                path[neighbour]=m
+           
+       
+    print(f'Path :{path}')
+ 
+ 
+ 
+ 
+print("Following is the Breadth-First Search")
+bfs(visited, graph, '5','4')  
