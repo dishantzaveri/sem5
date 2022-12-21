@@ -1,0 +1,28 @@
+Query Optimization
+
+use world;
+-- SELECT
+-- select * from city where CountryCode="IND";
+-- optimize table city;
+
+-- Nested
+-- select Name from city 
+-- where Population > (select AVG(Population) from city) and
+-- CountryCode in (select Code from country
+-- where Population > (select AVG(Population) from country));
+-- optimize table city,country;
+
+-- Right Join
+-- select * from city right join country
+-- on city.CountryCode in 
+-- (select code from country where LifeExpectancy>80.0);
+-- optimise table city,country;
+
+-- Inner Join
+-- select * from city inner join country
+-- on city.CountryCode in 
+-- (select code from country where LifeExpectancy>75.0);
+
+-- Indexing
+-- create index Name on country(Name);
+-- select * from country where Name = "India";
